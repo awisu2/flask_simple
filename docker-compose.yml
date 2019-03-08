@@ -3,12 +3,12 @@ services:
   flask_sample:
     build: 
       context: ./
-      dockerfile: docker/flask_sample/Dockerfile
+      dockerfile: docker/flask_simple/Dockerfile
     working_dir: /usr/src/app
     volumes:
       - ./:/usr/src/app
     env_file:
-      - docker/flask_sample.env
+      - docker/flask_simple.env
     command: flask run --host=0.0.0.0
     ports:
       - 5000:5000
