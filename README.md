@@ -39,18 +39,18 @@ migration sample
 
 ```bash
 # init (create migrations directory)
-docker-compose exec -e MIGRADE=1 flask_sample flask db init
+docker-compose exec -e MIGRADE=1 flask_simple flask db init
 
 # generate migrate script from models
-docker-compose exec -e MIGRADE=1 flask_sample flask db migrate
+docker-compose exec -e MIGRADE=1 flask_simple flask db migrate
 
 # upgrade
-docker-compose exec -e MIGRADE=1 flask_sample flask db upgrade
+docker-compose exec -e MIGRADE=1 flask_simple flask db upgrade
 
 # downgrade
-docker-compose exec -e MIGRADE=1 flask_sample flask db downgrade
+docker-compose exec -e MIGRADE=1 flask_simple flask db downgrade
 
 # create new revision
-docker-compose exec -e MIGRADE=1 flask_sample flask db revision
-docker-compose exec -e MIGRADE=1 flask_sample flask db revision --rev-id 201903081537_createuser
+docker-compose exec -e MIGRADE=1 flask_simple flask db revision
+docker-compose exec -e MIGRADE=1 flask_simple flask db revision --rev-id 201903081537_createuser
 ```

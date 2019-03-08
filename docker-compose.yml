@@ -1,6 +1,6 @@
 version: '3.3'
 services:
-  flask_sample:
+  flask_simple:
     build: 
       context: ./
       dockerfile: docker/flask_simple/Dockerfile

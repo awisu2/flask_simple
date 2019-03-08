@@ -15,7 +15,7 @@ class DefaultConfig:
   APP_PROD = getenv('APP_ENV') == 'prod'
 
   # template用パラメータ
-  SITE_NAME = 'flask sample'
+  SITE_NAME = 'flask simple'
 
   # db setting
   SQLALCHEMY_DATABASE_URI='sqlite:////tmp/test.db'
