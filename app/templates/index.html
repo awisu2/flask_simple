@@ -13,7 +13,7 @@
   {% endif %}
 {% endwith %}
 
-{% if user_id %}
+{% if login_info %}
   <a href="/logout">logout</a>
 {% else %}
   <form method="POST" action="/login">
@@ -23,9 +23,9 @@
 {% endif %}
 
 <h2>info</h2>
-{% if user_id %}
+{% if login_info %}
 <p>
-    login user_id: {{user_id}}
+    login user_id: {{login_info}}
 </p>
 {% endif %}
 {% endblock %}
