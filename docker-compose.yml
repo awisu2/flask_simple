@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  flask_sample:
+    build: 
+      context: ./
+      dockerfile: docker/flask_sample/Dockerfile
+    working_dir: /usr/src/app
+    volumes:
+      - ./:/usr/src/app
+    env_file:
+      - docker/flask_sample.env
+    command: flask run --host=0.0.0.0
+    ports:
+      - 5000:5000
+    restart: "no"
+  

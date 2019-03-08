@@ -1,0 +1,19 @@
+#left, #left * {
+  color: #eee;
+}
+
+
+ul.info, ol.info {
+  padding: 0;
+}
+
+ul.info li, ol.info li {
+  list-style-type: none;
+}
+
+ul.info.warning li, ol.info.warning li {
+  color: #b20202;
+  border: solid 1px #b20202;
+  padding: 3px;
+  border-radius: 3px;
+}

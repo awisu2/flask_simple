@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/clear.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename=('img/favicon.png' if config['APP_PROD'] else 'img/favicon_dev.png')) }}">
+    <title>{% if title %}{{title}} - {% endif %}{{ config['SITE_NAME'] }}</title>
+  </head>
+  <body>
+    <div id="container">
+      <div id="content">
+        <h1>{% if title %}{{title}}{% else %}{{config['SITE_NAME']}}{% endif %}</h1>
+        {% block content %}{% endblock %}
+      </div>
+
+      <div id="left">
+        <img rel="shortcut icon" href="{{ url_for('static', filename=config['TEMPLATE_FAVICON']) }}">
+        menu
+      </div>
+    </div>
+
+    </div>
+  </body>
+</html>
