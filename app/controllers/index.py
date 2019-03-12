@@ -10,7 +10,7 @@ bp = Blueprint(BP_NAME, __name__, url_prefix=BP_URL_PREFIX)
 def index():
   # login info
   login_info = get_login_info()
-  return create_template('index.html', app, title='', login_info=login_info)
+  return create_template('index.html', title='', login_info=login_info)
 
 @bp.route('/login', methods=['POST'])
 def login():

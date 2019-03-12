@@ -54,3 +54,22 @@ docker-compose exec -e MIGRADE=1 flask_simple flask db downgrade
 docker-compose exec -e MIGRADE=1 flask_simple flask db revision
 docker-compose exec -e MIGRADE=1 flask_simple flask db revision --rev-id 201903081537_createuser
 ```
+
+tests
+-----
+
+`docker-compose run flask_simple pip install -e . && pytest`
+
+- *NOTE*: `pip install -e .`は初回だけで良いので、upしたインスタンスにexecで代用しても良い。
+
+command
+-------
+
+以下はサンプルコマンド、実態は*app/commands*配下のスクリプト
+
+- `docker-compose run flask_simple sample hello foobar`
+  - sample: appgroup
+  - hello: function name
+  - foobar: arg
+
+commandの詳細はこちら、[Command Line Interface — Flask 1\.0\.2 documentation](http://flask.pocoo.org/docs/1.0/cli/#custom-commands)

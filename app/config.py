@@ -1,5 +1,6 @@
 from datetime import timedelta
 from os import getenv
+from os.path import dirname
 
 class DefaultConfig:
   # flask's config
@@ -8,8 +9,14 @@ class DefaultConfig:
   SERVER_NAME = None # use by url_for(), cookie session. 設定する場合は起動時のhost、portと同一にする必要あり
   SECRET_KEY = b'\xab_\xfcC\x18js\xec><\xdb\xc640uH' # session cookie's key. (ex: `python -c 'import os; print(os.urandom(16))'`)
 
+  # APPのディレクトリ
+  APP_DIR = dirname(__file__)
+
   # 自動でrouterに登録する対象のディレクトリ
   ROUTER_DIRS = ['controllers']
+
+  # 自動でcommandに登録する対象のディレクトリ
+  COMMAND_DIRS = ['commands']
 
   # アプリがPRODUCTIONであるかフラグ
   APP_PROD = getenv('APP_ENV') == 'prod'

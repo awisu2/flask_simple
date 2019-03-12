@@ -1,6 +1,6 @@
-from flask import render_template
+from flask import render_template, current_app as app
 
-def create_template(templatename, app, *, title='', **args):
+def create_template(templatename, *, title='', **args):
   """
   テンプレートの作成、共通で利用するパラメータをセット
   """

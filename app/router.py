@@ -9,8 +9,8 @@ def init_router(app):
   app.logger.debug('init_router start')
 
   # 指定ディレクト配下をblueprintに登録
-  base_dir = dirname(__file__)
   dirs = app.config.get('ROUTER_DIRS')
   if dirs:
+    base_dir = app.config.get('APP_DIR')
     for dir in dirs:
       add_blueprint_underdir(app, join(base_dir, dir))
