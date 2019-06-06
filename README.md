@@ -15,7 +15,7 @@ after you can access *http://localhost:5000*
 ```py
 # on venv
 python3 -m venv .venv
-source venv/bin/activate
+source .venv/bin/activate
 
 # install
 pip install --upgrade pip
@@ -45,7 +45,7 @@ docker-compose exec -e MIGRADE=1 flask_simple flask db upgrade
 # downgrade
 docker-compose exec -e MIGRADE=1 flask_simple flask db downgrade
 
-# create new revision
+# create new revision(ファイル名はハッシュ値のため、--rev-idを指定したほうが良い)
 docker-compose exec -e MIGRADE=1 flask_simple flask db revision
 docker-compose exec -e MIGRADE=1 flask_simple flask db revision --rev-id 201903081537_createuser
 ```

@@ -1,0 +1,167 @@
+#!/bin/bash
+
+# setup
+cwd=$(cd $(dirname "$0"); pwd)
+base=$(cd $(dirname "$cwd");pwd)
+
+compose=$(which docker-compose)
+if [[ -x "$compose" ]]; then
+    :
+else
+    echo "Please install docker-compose."
+    exit 2
+fi
+
+# functions
+echo_head() {
+    echo "== call $1 =========="
+}
+
+# functions docker-compose
+compose_up() {
+    echo_head "docker-compose up"
+    $compose up
+}
+
+compose_down() {
+    echo_head "dosker-compose down $*"
+    $compose down $*
+}
+
+compose_build() {
+    echo_head "dosker-compose build $*"
+    $compose build $*
+}
+
+compose_start() {
+    echo_head "dosker-compose start $*"
+    $compose start $*
+}
+
+compose_stop() {
+    echo_head "dosker-compose stop $*"
+    $compose stop $*
+}
+
+compose_restart() {
+    echo_head "dosker-compose restart $*"
+    $compose restart $*
+}
+
+compose_ps() {
+    echo_head "dosker-compose ps"
+    $compose ps
+}
+
+compose_logs() {
+    echo_head "dosker-compose log $1"
+    $compose logs -f $1
+}
+
+invoke_run() {
+    echo_head "dosker-compose run $*"
+    $compose run --rm $*
+}
+
+# functions docker-compose
+flask_db() {
+    $compose exec -e "MIGRADE=1" flask_simple flask db $*
+}
+
+migrate() {
+    echo_head "flask migrate"
+    flask_db migrate
+}
+
+migrate_init() {
+    echo_head "flask migrate init"
+    flask_db init
+}
+
+migrate_upgrade() {
+    echo_head "flask migrate upgrade"
+    flask_db upgrade
+}
+
+migrate_downgrade() {
+    echo_head "flask migrate downgrade $1"
+    flask_db downgrade $1
+}
+
+migrate_revision() {
+    echo_head "flask migrate revision $1"
+    datestr=$(date "+%Y%m%d%H%M%S")
+    flask_db revision --rev-id "${datestr}_${1}"
+}
+
+cmd=$1
+shift
+case "$cmd" in
+    up)
+        compose_up $* && compose_ps && exit 0
+        ;;
+    down)
+        compose_down $* && exit 0
+        ;;
+    build)
+        compose_build $* && exit 0
+        ;;
+    start)
+        compose_start $* && exit 0
+        ;;
+    stop)
+        compose_stop $* && exit 0
+        ;;
+    restart)
+        compose_restart $* && exit 0
+        ;;
+    ps)
+        compose_ps && exit 0
+        ;;
+    logs)
+        logs $* && exit 0
+        ;;
+    run)
+        invoke_run $* && exit 0
+        ;;
+    migrate)
+        migrate $* && exit 0
+        ;;
+    migrate_init)
+        migrate_init $* && exit 0
+        ;;
+    migrate_upgrade)
+        migrate_upgrade $* && exit 0
+        ;;
+    migrate_downgrade)
+        migrate_downgrade $* && exit 0
+        ;;
+    migrate_revision)
+        migrate_revision $* && exit 0
+        ;;
+    *)
+        read -d '' help <<-EOF
+Usage: $0 command
+
+Service:
+  up       Create service containers and start backend services
+  down     Stop backend services and remove service containers
+  build    Start services
+  start    Start services
+  stop     Stop services
+  restart  Restart services
+  ps       Show status of services
+  logs     [options] default: none. View output from containers
+  run      [service] [command] run command in given container
+
+Maigrate:
+  migrate_init      create mmigrations directory
+  migrate           generate migrate script from models
+  migrate_revision  create revision file
+  migrate_upgrade   upgrade database
+  migrate_downgrade downgrade database
+EOF
+        echo "$help"
+        exit 2
+        ;;
+esac
