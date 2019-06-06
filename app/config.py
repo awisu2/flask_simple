@@ -25,7 +25,7 @@ class DefaultConfig:
   SITE_NAME = 'flask simple'
 
   # db setting
-  SQLALCHEMY_DATABASE_URI='sqlite:////tmp/test.db'
+  SQLALCHEMY_DATABASE_URI='postgresql://postgres@db/postgres' # dialect+driver://username:password@host:port/database
   SQLALCHEMY_TRACK_MODIFICATIONS=False
   MIGRADE = getenv('MIGRADE') == '1'
 
