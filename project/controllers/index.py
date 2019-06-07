@@ -1,6 +1,6 @@
 from flask import Blueprint, current_app as app, redirect, request, flash
-from app.libs.template import create_template
-from app.libs.sesssion import login as session_login, logout as session_logout, check_login, get_login_info
+from project.libs.template import create_template
+from project.libs.sesssion import login as session_login, logout as session_logout, check_login, get_login_info
 
 BP_URL_PREFIX = '/'
 BP_NAME = BP_URL_PREFIX

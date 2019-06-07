@@ -45,7 +45,7 @@ compose_stop() {
 
 compose_restart() {
     echo_head "dosker-compose restart $*"
-    $compose restart $*
+    $compose stop && $compose up $*
 }
 
 compose_ps() {
