@@ -139,6 +139,9 @@ case "$cmd" in
     migrate_revision)
         migrate_revision $* && exit 0
         ;;
+    db_access)
+        psql -U postgres -h localhost && exit 0
+        ;;
     *)
         read -d '' help <<-EOF
 Usage: $0 command
@@ -160,6 +163,9 @@ Maigrate:
   migrate_revision  create revision file
   migrate_upgrade   upgrade database
   migrate_downgrade downgrade database
+
+Database:
+  db_access access database
 EOF
         echo "$help"
         exit 2

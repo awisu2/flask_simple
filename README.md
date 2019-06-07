@@ -4,7 +4,12 @@ flaskの勉強がてら、通常必要になりそうな部分までを実装
 
 ## run
 
-`docker-compose up`
+```bash
+bin/project up
+
+# create table (only first)
+bin/project migrate_upgrade
+```
 
 after you can access *http://localhost:5000*
 
