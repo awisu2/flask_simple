@@ -1,17 +1,14 @@
-flask_simple
-============
+# flask_simple
 
 flaskの勉強がてら、通常必要になりそうな部分までを実装
 
-run
----
+## run
 
 `docker-compose up`
 
 after you can access *http://localhost:5000*
 
-run by command
---------------
+## run by command
 
 ### setuup(for local, for editor)
 
@@ -27,13 +24,11 @@ pip install -r requirements.txt
 
 - `APP_ENV=dev flask run --host=0.0.0.0 --port=5000`
   - with debug: `FLASK_ENV=development APP_ENV=dev flask run --host=127.0.0.1 --port=5000`
-
 - FLASK_ENV: flaskフレームワーク自体の動作環境
 - APP_ENV: アプリ自体の動作環境 *app.config.{APP_ENV}Config* のConfigを読み込みます
   - 'prod': productionになり、app.config['APP_PROD']がTrueになります
 
-migration sample
-----------------
+## migration sample
 
 - document: [Welcome to Flask\-Migrate’s documentation\! — Flask\-Migrate documentation](https://flask-migrate.readthedocs.io/en/latest/#command-reference)
 
@@ -55,15 +50,13 @@ docker-compose exec -e MIGRADE=1 flask_simple flask db revision
 docker-compose exec -e MIGRADE=1 flask_simple flask db revision --rev-id 201903081537_createuser
 ```
 
-tests
------
+## tests
 
 `docker-compose run flask_simple pip install -e . && pytest`
 
 - *NOTE*: `pip install -e .`は初回だけで良いので、upしたインスタンスにexecで代用しても良い。
 
-command
--------
+## command
 
 以下はサンプルコマンド、実態は*app/commands*配下のスクリプト
 
