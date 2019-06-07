@@ -1,7 +1,7 @@
-version: '3'
+version: "3"
 services:
   flask_simple:
-    build: 
+    build:
       context: ./
       dockerfile: docker/flask_simple/Dockerfile
     working_dir: /usr/src/app

@@ -1,31 +1,22 @@
-{% extends "layout.html" %}
-
-{% block content %}
+{% extends "layout.html" %} {% block content %}
 <h2>login/logout sample</h2>
 
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class="info warning">
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-
-{% if login_info %}
-  <a href="/logout">logout</a>
+{% with messages = get_flashed_messages() %} {% if messages %}
+<ul class="info warning">
+  {% for message in messages %}
+  <li>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %} {% endwith %} {% if login_info %}
+<a href="/logout">logout</a>
 {% else %}
-  <form method="POST" action="/login">
-    <input type="text" name="user_id" placeholder="input your name">
-    <input type="submit" value="login">
-  </form>
+<form method="POST" action="/login">
+  <input type="text" name="user_id" placeholder="input your name" />
+  <input type="submit" value="login" />
+</form>
 {% endif %}
 
 <h2>info</h2>
 {% if login_info %}
-<p>
-    login user_id: {{login_info}}
-</p>
-{% endif %}
-{% endblock %}
+<p>login user_id: {{ login_info }}</p>
+{% endif %} {% endblock %}

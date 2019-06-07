@@ -2,8 +2,7 @@
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 200px 1fr;
-  grid-template-areas:
-    "nav content";
+  grid-template-areas: "nav content";
 
   margin: 0;
   padding: 0;
