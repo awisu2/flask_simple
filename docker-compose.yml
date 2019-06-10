@@ -12,6 +12,7 @@ services:
     command: flask run --host=0.0.0.0
     ports:
       - 5000:5000
+      - 5678:5678 # for remote debug
     restart: "no"
   db:
     image: postgres

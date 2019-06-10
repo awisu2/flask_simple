@@ -37,6 +37,12 @@ class DefaultConfig:
     SESSION_SQLALCHEMY_TABLE = 'session'
     SESSION_TYPE = 'sqlalchemy'
 
+    # remote debug settings
+    REMOTE_DEBUGGING = getenv('REMOTE_DEBUGGING') is not None
+    REMOTE_HOST = '0.0.0.0'
+    REMOTE_PORT = 5678
+    REDIRECT_OUTPUT = True
+
 
 class DevConfig:
     pass

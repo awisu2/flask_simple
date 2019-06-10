@@ -63,6 +63,10 @@ invoke_run() {
     $compose run --rm $*
 }
 
+compose_up_remotedebug() {
+    REMOTE_DEBUGGING=1 FLASK_DEBUG=0 $compose up $*
+}
+
 # functions docker-compose
 flask_db() {
     $compose exec -e "MIGRADE=1" flask_simple flask db $*
@@ -98,7 +102,7 @@ cmd=$1
 shift
 case "$cmd" in
     up)
-        compose_up $* && compose_ps && exit 0
+        compose_up $* && exit 0
         ;;
     down)
         compose_down $* && exit 0
@@ -124,6 +128,10 @@ case "$cmd" in
     run)
         invoke_run $* && exit 0
         ;;
+    up_remotedebug)
+        compose_up_remotedebug $* && exit 0
+        ;;
+
     migrate)
         migrate $* && exit 0
         ;;
@@ -147,15 +155,16 @@ case "$cmd" in
 Usage: $0 command
 
 Service:
-  up       Create service containers and start backend services
-  down     Stop backend services and remove service containers
-  build    Start services
-  start    Start services
-  stop     Stop services
-  restart  Restart services
-  ps       Show status of services
-  logs     [options] default: none. View output from containers
-  run      [service] [command] run command in given container
+  up             Create service containers and start backend services
+  down           Stop backend services and remove service containers
+  build          Start services
+  start          Start services
+  stop           Stop services
+  restart        Restart services
+  ps             Show status of services
+  logs           [options] default: none. View output from containers
+  run            [service] [command] run command in given container
+  up_remotedebug run remote debug
 
 Maigrate:
   migrate_init      create mmigrations directory

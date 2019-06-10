@@ -12,6 +12,16 @@ def create_app():
     app = Flask(__name__)
 
     init_config(app, __name__)
+
+    # remote debug setting
+    if app.config.get('REMOTE_DEBUGGING'):
+        import ptvsd
+        ptvsd.enable_attach(address=(
+            app.config.get('REMOTE_HOST'),
+            app.config.get('REMOTE_PORT')
+        ), redirect_output=app.config.get('REDIRECT_OUTPUT'))
+        ptvsd.wait_for_attach()
+
     init_db(app, db)
 
     # migrateモードの場合不要な処理はおこなわない
