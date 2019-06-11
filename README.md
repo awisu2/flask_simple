@@ -4,7 +4,12 @@ flaskの勉強がてら、通常必要になりそうな部分までを実装
 
 ## run
 
-`docker-compose up`
+```bash
+bin/project up
+
+# create table (only first)
+bin/project migrate_upgrade
+```
 
 after you can access *http://localhost:5000*
 
@@ -14,8 +19,8 @@ after you can access *http://localhost:5000*
 
 ```py
 # on venv
-python3 -m venv venv
-source venv/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 
 # install
 pip install --upgrade pip
@@ -45,7 +50,7 @@ docker-compose exec -e MIGRADE=1 flask_simple flask db upgrade
 # downgrade
 docker-compose exec -e MIGRADE=1 flask_simple flask db downgrade
 
-# create new revision
+# create new revision(ファイル名はハッシュ値のため、--rev-idを指定したほうが良い)
 docker-compose exec -e MIGRADE=1 flask_simple flask db revision
 docker-compose exec -e MIGRADE=1 flask_simple flask db revision --rev-id 201903081537_createuser
 ```

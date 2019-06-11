@@ -1,7 +1,7 @@
-version: '3.3'
+version: "3"
 services:
   flask_simple:
-    build: 
+    build:
       context: ./
       dockerfile: docker/flask_simple/Dockerfile
     working_dir: /usr/src/app
@@ -12,5 +12,14 @@ services:
     command: flask run --host=0.0.0.0
     ports:
       - 5000:5000
+      - 5678:5678 # for remote debug
     restart: "no"
-  
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: ""
+    ports:
+      - 5432:5432
+    restart: "no"
